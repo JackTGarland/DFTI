@@ -1,4 +1,5 @@
 <?PHP
+session_start();
 $authFile = fopen("auth.txt", "r");
 $username = fgets($authFile);
 $password = fgets($authFile);
