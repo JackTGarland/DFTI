@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?PHP
 session_start();
 $authFile = fopen("auth.txt", "r");

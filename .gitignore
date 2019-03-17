@@ -6,4 +6,4 @@ pihole/blockingpage\.css
 
 pihole/index\.php
 
-PHP/login\.php
+PHP/auth\.txt
