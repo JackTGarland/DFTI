@@ -1,6 +1,6 @@
 <?php
 session_start();
-#includes 'PHP/login.php';
+includes 'PHP/login.php';
 #includes 'PHP/logout.php';
 ?>
 <!doctype html>
@@ -8,29 +8,37 @@ session_start();
 
 <head>
 <title>test</title>
-<script type ='text/javascript'>
-function status()
-{
-    var xdata = <?php echo json_encode($_SESSION["username"]); ?>;
-    if (xdata == null){
-        document.getElementById("status").innerHTML = "You are not logged in.";
-    }else{
-        document.getElementById('status').innerHTML = "You are logged in.";
-    };
-
-}
+<link rel="stylesheet" type="text/css" href="Public/css/main.css">
+<script type ='text/javascript' src="Public/javascript/index.js">>
 </script>
 </head>
 
 <body onload="status()">
 <p id="status"></p>
-<input id="username" /><br/>
-<input id="password" /><br/>
-<input type="button" value="login"  />
+<div id="login">
+<input id="username" placeholder="username" /><br/>
+<input id="password"  placeholder="password" /><br/>
+<input type="button" value="login" onclick="ajexrequest()" />
+</div>
+<div id="nav">
+<input id="serch" placeholder="serch bar" />
+<input type="button" value="serch" />
+</div>
+<div id="results">
+</div>
+
 
 </body>
 <?php
+function createSession(){
+    $results = login()
+    if ($results == null){
 
+    }else{
+        
+        $_SESSION["token"] = (($_SESSION["username"].strlen + $_SESSION["password"].strlen) + 100 / 25) * 100;
+    }
+}
 echo "hello world";
 echo "This is just a test";
 ?>

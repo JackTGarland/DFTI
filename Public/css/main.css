@@ -1,3 +1,8 @@
-.classthing{
-    width: 100%;
+#login{
+    float:left;
+    padding-right: 10px;
+}
+#nav{
+    margin-left: 10px;
+    padding-left: 10px;
 }
