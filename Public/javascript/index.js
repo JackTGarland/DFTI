@@ -14,3 +14,12 @@ function ajexrequest() {
 function responceRecived(e){
     document.getElementById('results').innerHTML = e.target.responceText;
 };
+function status() {
+
+    var xdata = <? php echo json_encode($_SESSION["token"]); ?>;
+    if (xdata == null) {
+        document.getElementById("status").innerHTML = "You are not logged in.";
+    } else {
+        document.getElementById('status').innerHTML = "You are logged in.";
+    };
+};
