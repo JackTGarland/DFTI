@@ -1,10 +1,10 @@
 <?PHP
-session_start();
+/*session_start();
 $authFile = fopen("auth.txt", "r");
 $Databaseusername = fgets($authFile);
 $Databasepassword = fgets($authFile);
 fclose($authFile);
-/*$a = $_GET["course"];
+$a = $_GET["course"];
 $conn = new PDO("mysql:host=localhost;dbname=student_records;", $username, $password);
 
 $results = $conn>query("SELECT * FROM student WHERE course='$a'");

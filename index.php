@@ -1,6 +1,6 @@
 <?php
 session_start();
-includes 'PHP/login.php';
+include '../PHP/login.php';
 #includes 'PHP/logout.php';
 ?>
 <!doctype html>
@@ -40,6 +40,17 @@ includes 'PHP/login.php';
         $_SESSION["token"] = (($_SESSION["username"].strlen + $_SESSION["password"].strlen) + 100 / 25) * 100;
     }
 }*/
+
+function status() {
+
+    var xdata = <?php echo json_encode($_SESSION["token"]); ?>;
+    if (xdata == null){
+        document.getElementById("status").innerHTML = "You are not logged in.";
+    }else{
+        document.getElementById('status').innerHTML = "You are logged in.";
+    };
+
+};
 echo "hello world";
 echo "This is just a test";
 ?>
