@@ -10,8 +10,8 @@ include '../PHP/login.php';
 <title>test</title>
 <link rel="stylesheet" type="text/css" href="Public/css/main.css">
 <script type ='text/javascript' src="Public/javascript/index.js"></script>
-<script type ='text/javascript'>
-function status() {
+<script>
+function statusf() {
 
     var xdata = <? php echo json_encode($_SESSION["token"]); ?>;
     if (xdata == null) {
@@ -24,7 +24,7 @@ function status() {
 
 </head>
 
-<body onload="status()">
+<body onload="statusf()">
 <p id="status"></p>
 <div id="login">
 <input id="username" placeholder="username" /><br/>
