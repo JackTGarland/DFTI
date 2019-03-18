@@ -9,8 +9,19 @@ include '../PHP/login.php';
 <head>
 <title>test</title>
 <link rel="stylesheet" type="text/css" href="Public/css/main.css">
-<script type ='text/javascript' src="Public/javascript/index.js">>
+<script type ='text/javascript' src="Public/javascript/index.js"></script>
+<script type ='text/javascript'>
+function status() {
+
+    var xdata = <? php echo json_encode($_SESSION["token"]); ?>;
+    if (xdata == null) {
+        document.getElementById("status").innerHTML = "You are not logged in.";
+    } else {
+        document.getElementById('status').innerHTML = "You are logged in.";
+    };
+};
 </script>
+
 </head>
 
 <body onload="status()">
