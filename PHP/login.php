@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?PHP
 session_start();
 $authFile = fopen("auth.txt", "r");
@@ -21,13 +20,23 @@ while($row=$results->fetch())
 function login(){
     $username = $_GET["username"];
     $password = $_GET["password"];
-    $conn = new PDO("mysql:host=localhost;dbname=assign140;", $Databaseusername, $Databasepassword);
-    $results = $conn>query("SELECT * FROM users WHERE username='$username' AND password='$password'");
-    if ($results != null) {
-        $_SESSION["username"] = $results.$row["username"]
-        $_SESSION["password"] = $results.$row["password"]
+	if($username == "admin" & $password == "admin"){
+	//Due to no access to database this is used to simulate database query.
+    //$conn = new PDO("mysql:host=localhost;dbname=assign140;", $Databaseusername, $Databasepassword);
+    //$results = $conn>query("SELECT * FROM users WHERE username='$username' AND password='$password'");
+    //if ($results != null) {
+        $_SESSION["username"] = $username
+        $_SESSION["password"] = $password
+		createSession();
+		echo 'succsess';
     }else{
-        return null;
+		echo 'Failed';
     };
 }
+function createSession(){
+   
+     $_SESSION["token"] = (($_SESSION["username"].strlen + $_SESSION["password"].strlen) + 100 / 25) * 100;
+}
+
+
 ?>

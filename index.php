@@ -19,6 +19,7 @@ includes 'PHP/login.php';
 <input id="username" placeholder="username" /><br/>
 <input id="password"  placeholder="password" /><br/>
 <input type="button" value="login" onclick="ajexrequest()" />
+<p id="failed"></p>
 </div>
 <div id="nav">
 <input id="serch" placeholder="serch bar" />
@@ -30,7 +31,7 @@ includes 'PHP/login.php';
 
 </body>
 <?php
-function createSession(){
+/*function createSession(){
     $results = login()
     if ($results == null){
 
@@ -38,7 +39,7 @@ function createSession(){
         
         $_SESSION["token"] = (($_SESSION["username"].strlen + $_SESSION["password"].strlen) + 100 / 25) * 100;
     }
-}
+}*/
 echo "hello world";
 echo "This is just a test";
 ?>

@@ -6,9 +6,10 @@ function ajexrequest() {
 
     xhr2.addEventListner ("load", responceRecived);
 
-    xhr2.open('GET', 'index.php?username=' + username + '&password=' + password);
+    xhr2.open('POST', 'login.php?username=' + username + '&password=' + password);
 
-    xhr2.send();
+    xhr2.send(e);
+    document.getElementById('results').innerHTML = e.target.responceText;
 }
 function responceRecived(e){
     document.getElementById('results').innerHTML = e.target.responceText;
