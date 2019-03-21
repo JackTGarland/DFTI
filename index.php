@@ -13,7 +13,7 @@ include '../PHP/login.php';
 <script>
 function statusf() {
 
-    var xdata = <? php echo json_encode($_SESSION["token"]); ?>;
+    var xdata = <?php echo json_encode($_SESSION["token"]); ?>;
     if (xdata == null) {
         document.getElementById("status").innerHTML = "You are not logged in.";
     } else {
@@ -53,5 +53,27 @@ function statusf() {
 }*/
 echo "hello world";
 echo "This is just a test";
+
+function login(){
+
+    $username = $_GET["username"];
+    $password = $_GET["password"];
+	if($username == "admin" & $password == "admin"){
+	//Due to no access to database this is used to simulate database query.
+    //$conn = new PDO("mysql:host=localhost;dbname=assign140;", $Databaseusername, $Databasepassword);
+    //$results = $conn>query("SELECT * FROM users WHERE username='$username' AND password='$password'");
+    //if ($results != null) {
+        $_SESSION["username"] = $username
+        $_SESSION["password"] = $password
+		createSession();
+		echo 'succsess';
+    }else{
+		echo 'Failed';
+    };
+}
+function createSession(){
+   
+     $_SESSION["token"] = (($_SESSION["username"].strlen + $_SESSION["password"].strlen) + 100 / 25) * 100;
+}
 ?>
 </html>

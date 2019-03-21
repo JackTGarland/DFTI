@@ -18,6 +18,7 @@ while($row=$results->fetch())
 }*/
 
 function login(){
+
     $username = $_GET["username"];
     $password = $_GET["password"];
 	if($username == "admin" & $password == "admin"){
