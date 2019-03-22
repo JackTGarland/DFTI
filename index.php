@@ -1,7 +1,7 @@
 <?php
 session_start();
 include '../PHP/login.php';
-#includes 'PHP/logout.php';
+include '..PHP/logout.php';
 ?>
 <!doctype html>
 <html>
@@ -53,7 +53,7 @@ function statusf() {
 }*/
 echo "hello world";
 echo "This is just a test";
-
+//login() crashes due to $_SESSION["username"]
 function login(){
 
     $username = $_GET["username"];
@@ -63,12 +63,12 @@ function login(){
     //$conn = new PDO("mysql:host=localhost;dbname=assign140;", $Databaseusername, $Databasepassword);
     //$results = $conn>query("SELECT * FROM users WHERE username='$username' AND password='$password'");
     //if ($results != null) {
-        $_SESSION["username"] = $username
-        $_SESSION["password"] = $password
-		createSession();
-		echo 'succsess';
+        $_SESSION['username'] = $username;
+        $_SESSION['password'] = $password;
+		//createSession();
+		echo json_encode('succsess');
     }else{
-		echo 'Failed';
+		echo json_encode('Failed');
     };
 }
 function createSession(){

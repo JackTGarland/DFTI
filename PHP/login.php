@@ -1,5 +1,6 @@
 <?PHP
-/*session_start();
+session_start();
+/*
 $authFile = fopen("auth.txt", "r");
 $Databaseusername = fgets($authFile);
 $Databasepassword = fgets($authFile);
@@ -16,24 +17,21 @@ while($row=$results->fetch())
     echo "phone " . $row["phone"] . "<br/>" ;
     echo "</P>";
 }*/
-
-function login(){
-
-    $username = $_GET["username"];
-    $password = $_GET["password"];
+    $username = $_GET['username'];
+    $password = $_GET['password'];
 	if($username == "admin" & $password == "admin"){
 	//Due to no access to database this is used to simulate database query.
     //$conn = new PDO("mysql:host=localhost;dbname=assign140;", $Databaseusername, $Databasepassword);
     //$results = $conn>query("SELECT * FROM users WHERE username='$username' AND password='$password'");
     //if ($results != null) {
-        $_SESSION["username"] = $username
-        $_SESSION["password"] = $password
+        //$_SESSION["username"] = $username
+        //$_SESSION["password"] = $password
 		createSession();
-		echo 'succsess';
+		echo json_encode("success");
     }else{
-		echo 'Failed';
+		echo json_encode("Failure");
     };
-}
+
 function createSession(){
    
      $_SESSION["token"] = (($_SESSION["username"].strlen + $_SESSION["password"].strlen) + 100 / 25) * 100;
