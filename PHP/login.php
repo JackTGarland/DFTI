@@ -5,9 +5,9 @@ $authFile = fopen("auth.txt", "r");
 $Databaseusername = fgets($authFile);
 $Databasepassword = fgets($authFile);
 fclose($authFile);
-$a = $_GET["course"];
-$conn = new PDO("mysql:host=localhost;dbname=student_records;", $username, $password);
 
+
+/*
 $results = $conn>query("SELECT * FROM student WHERE course='$a'");
 while($row=$results->fetch())
 {
@@ -19,22 +19,34 @@ while($row=$results->fetch())
 }*/
     $username = $_GET['username'];
     $password = $_GET['password'];
-	if($username == "admin" & $password == "admin"){
-	//Due to no access to database this is used to simulate database query.
-    //$conn = new PDO("mysql:host=localhost;dbname=assign140;", $Databaseusername, $Databasepassword);
-    //$results = $conn>query("SELECT * FROM users WHERE username='$username' AND password='$password'");
-    //if ($results != null) {
-        //$_SESSION["username"] = $username
-        //$_SESSION["password"] = $password
-		createSession();
-		echo json_encode("success");
-    }else{
-		echo json_encode("Failure");
+	//if($username == "admin" & $password == "admin"){
+    //Due to no access to database this is used to simulate database query.
+    try {
+        $conn = new PDO("mysql:host=localhost;dbname=assign140;", $Databaseusername, $Databasepassword);
+        $results = $conn>query("SELECT * FROM users WHERE username='$username' AND password='$password'");
+        if ($results != null) {
+            //$_SESSION["username"] = $username;
+            //$_SESSION["password"] = $password;
+		    createSession();
+		    echo json_encode("success");
+        }else{
+		    echo json_encode("Failure");
+        };
+    }catch(PDOException $e){
+
+            $_SESSION["username"] = $username;
+            $_SESSION["password"] = $password;
+            $_SESSION["admin"]=1;
+            $_SESSION["failed"]=1; //this is used for testing, disable code that will try to use the database.
+		    createSession();
+            echo json_encode("connection failed defaulting to admin");
+            //as PHP myadmin is having trouble but for testing purpose we make it work.
     };
 
 function createSession(){
    
      $_SESSION["token"] = (($_SESSION["username"].strlen + $_SESSION["password"].strlen) + 100 / 25) * 100;
+     //A really bad token system but it works for this so I am keeping it for now.
 }
 
 

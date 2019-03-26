@@ -1,7 +1,8 @@
 <?php
 session_start();
 include '../PHP/login.php';
-include '..PHP/logout.php';
+include '../PHP/logout.php';
+include '../PHP/dbconnection.php';
 ?>
 <!doctype html>
 <html>
@@ -30,12 +31,15 @@ function statusf() {
 <input id="username" placeholder="username" /><br/>
 <input id="password"  placeholder="password" /><br/>
 <input type="button" value="login" onclick="ajexrequest()" />
+<input type="button" value="logout" onclick="logout()" />
 <p id="failed"></p>
 </div>
+
 <div id="nav">
 <input id="serch" placeholder="serch bar" />
 <input type="button" value="serch" />
 </div>
+<input type="button" value="file test" onclick="filetest()" />
 <div id="results">
 </div>
 
