@@ -17,30 +17,17 @@ while($row=$results->fetch())
     echo "</P>";
 }*/
     $name = $_GET['search'];
-    //try {
+    try {
         $conn = new PDO("mysql:host=localhost;dbname=assign140;", $Databaseusername, $Databasepassword);
         $results = $conn->query("SELECT * FROM venues WHERE name='$name' OR type='$name'");
-        $row=$results->fetch();
-        echo json_decode($row);
-        if ($row != null) {
+        $row=$results->fetchAll();
+        if($row != null){
             echo json_encode($row);
-                /*echo json_encode($row["name"]);
-                echo json_encode($row["type"]);
-                echo json_encode ($row["recommended"]);
-                echo json_encode($row["description"]);
-                echo json_encode($row["username"]);
-            /*while($row=$results->fetch()){
-                echo json_encode($row["name"]);
-                echo json_encode($row["type"]);
-                echo json_encode($row["recommended"]);
-                echo json_encode($row["description"]);
-                echo json_encode($row["username"]);
-            };*/
         }else{
 		    echo json_encode("No results found");
         };
-    /*}catch(PDOException $e){
+    }catch(PDOException $e){
             echo json_encode("There was an error connection to the database. An admin has been notified.");
             //as PHP myadmin is having trouble but for testing purpose we make it work.
-    };*/
+    };
 ?>

@@ -55,8 +55,7 @@ function statusf() {
         $_SESSION["token"] = (($_SESSION["username"].strlen + $_SESSION["password"].strlen) + 100 / 25) * 100;
     }
 }*/
-echo "hello world";
-echo "This is just a test";
+
 //login() crashes due to $_SESSION["username"]
 function login(){
 
