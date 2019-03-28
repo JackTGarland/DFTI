@@ -14,11 +14,11 @@ include '../PHP/dbconnection.php';
 <script>
 function statusf() {
 
-    var xdata = <?php echo json_encode($_SESSION["token"]); ?>;
+    var xdata = <?php echo json_encode($_SESSION["name"]); ?>;
     if (xdata == null) {
         document.getElementById("status").innerHTML = "You are not logged in.";
     } else {
-        document.getElementById('status').innerHTML = "You are logged in.";
+        document.getElementById('status').innerHTML = "Welcome back "+xdata;
     };
 };
 </script>
@@ -36,8 +36,8 @@ function statusf() {
 </div>
 
 <div id="nav">
-<input id="serch" placeholder="serch bar" />
-<input type="button" value="serch" />
+<input id="search" placeholder="search bar" />
+<input type="button" value="search" onclick="search()" />
 </div>
 <input type="button" value="file test" onclick="filetest()" />
 <div id="results">

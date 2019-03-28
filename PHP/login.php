@@ -1,9 +1,9 @@
 <?PHP
 session_start();
-/*
+
 $authFile = fopen("auth.txt", "r");
-$Databaseusername = fgets($authFile);
-$Databasepassword = fgets($authFile);
+$Databaseusername = trim(fgets($authFile));
+$Databasepassword = trim(fgets($authFile));
 fclose($authFile);
 
 
@@ -23,22 +23,24 @@ while($row=$results->fetch())
     //Due to no access to database this is used to simulate database query.
     try {
         $conn = new PDO("mysql:host=localhost;dbname=assign140;", $Databaseusername, $Databasepassword);
-        $results = $conn>query("SELECT * FROM users WHERE username='$username' AND password='$password'");
-        if ($results != null) {
-            //$_SESSION["username"] = $username;
-            //$_SESSION["password"] = $password;
+        $results = $conn->query("SELECT * FROM users WHERE username='$username' AND password='$password'");
+        $row = $results->fetch();
+        if ($row != null) {
+            $_SESSION["name"] = $row["name"];
+            $_SESSION["username"] = $username;
+            $_SESSION["password"] = $password;
 		    createSession();
-		    echo json_encode("success");
+		    echo json_encode($row);
         }else{
 		    echo json_encode("Failure");
         };
     }catch(PDOException $e){
 
-            $_SESSION["username"] = $username;
-            $_SESSION["password"] = $password;
-            $_SESSION["admin"]=1;
-            $_SESSION["failed"]=1; //this is used for testing, disable code that will try to use the database.
-		    createSession();
+            //$_SESSION["username"] = $username;
+            //$_SESSION["password"] = $password;
+            //$_SESSION["admin"]=1;
+            //$_SESSION["failed"]=1; //this is used for testing, disable code that will try to use the database.
+		    //createSession();
             echo json_encode("connection failed defaulting to admin");
             //as PHP myadmin is having trouble but for testing purpose we make it work.
     };
