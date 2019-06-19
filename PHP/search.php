@@ -24,7 +24,7 @@ while($row=$results->fetch())
         if($row != null){
             echo json_encode($row);
         }else{
-		    echo json_encode("No results found");
+		    echo json_encode("NRF");
         };
     }catch(PDOException $e){
             echo json_encode("There was an error connection to the database. An admin has been notified.");

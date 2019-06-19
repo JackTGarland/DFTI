@@ -36,60 +36,47 @@ function filetest(){
     xhr2.open("GET", '/PHP/dbconnection.php');
     xhr2.send();
 };
+function endorse() {
+    var e = window.event,
+        btn = e.target || e.srcElement;
+    
+};
 function search(){
     var xhr2 = new XMLHttpRequest();
     var search = document.getElementById('search').value;
+    document.getElementById('results').innerHTML = "";
     if(search != null){
         xhr2.onreadystatechange = function(){
             if (xhr2.readyState == 4 && xhr2.status == 200) {
-                //document.getElementById('results').innerHTML = xhr2.response;
-
-                //var row = document.createElement("div");
-                //row.style.float = "left";
-                
-                //document.getElementById('results').appendChild(row)
-                //console.log(JSON.parse(xhr2.response).length);
-                var i;
-                for(i = 0; i < JSON.parse(xhr2.response).length; i++){
+                if(JSON.parse(xhr2.response)==="NRF"){
+                    document.getElementById('results').innerHTML = "No Results Found";
+                }else{
+                for(var i = 0; i < JSON.parse(xhr2.response).length; i++){
                     var row = document.createElement("div");
                     var br = document.createElement("br");
-                    var rowname = document.createElement("div");
-                    var rowtype = document.createElement("div");
-                    var rowrec = document.createElement("div");
-                    var rowdescription = document.createElement("div");
-                    var rowuname = document.createElement("div");
-                    //row.style.float = "left";
-                    row.setAttribute("id", "row"+i);
-                    document.getElementById('results').appendChild(row);
-                    rowtype.style.float = "left";
-                    rowrec.style.float = "left";
-                    rowdescription.style.float = "left";
-                    rowuname.style.float = "left";
-                    rowname.style.float = "left";
-                    rowtype.style.padding.left = "10px";
-                    rowrec.style.padding.left = "10px";
-                    rowdescription.style.padding.left = "10px";
-                    rowuname.style.padding.left = "10px";
-                    rowname.style.padding.left = "10px";
-                    rowname.setAttribute("id", "rowname"+i);
-                    rowtype.setAttribute("id", "rowtype"+i);
-                    rowdescription.setAttribute("id", "rowndescription"+i);
-                    rowuname.setAttribute("id", "rowuname"+i);
-                    rowrec.setAttribute("id", "rowrec"+i);
-                    document.getElementById('row'+i).appendChild(rowname);
-                    document.getElementById('row'+i).appendChild(rowdescription);
-                    document.getElementById('row'+i).appendChild(rowtype);
-                    document.getElementById('row'+i).appendChild(rowuname);
-                    document.getElementById('row'+i).appendChild(rowrec);
+                    var span = document.createElement("span");
+                    br.setAttribute("id", "br"+i);
+                    for(var key in JSON.parse(xhr2.response)[i]){
+                        if(JSON.parse(xhr2.response)[i].hasOwnProperty(key)){
+                            if(isNaN(key)==false){
+                                console.log(key);
+                            }else{
+                        var rowelements = document.createElement("div");
+                        rowelements.setAttribute("id", "rowelement"+key);
+                        span.setAttribute("id", "span"+i);
+                        span.innerHTML = '<button id="button'+i+'" onclick="endorse()" value="endorse"> endorse </button>';
+                        row.appendChild(rowelements);
+                        rowelements.innerHTML =JSON.parse(xhr2.response)[i][key];
+                            };
+                        };
+                        
+                    }
+                    row.appendChild(span);
                     row.appendChild(br);
-                    document.getElementById('rowname'+i).innerHTML = (JSON.parse(xhr2.response)[i].name);
-                    document.getElementById('rowndescription'+i).innerHTML = (JSON.parse(xhr2.response)[i].description);
-                    document.getElementById('rowuname'+i).innerHTML = (JSON.parse(xhr2.response)[i].username);
-                    document.getElementById('rowtype'+i).innerHTML = (JSON.parse(xhr2.response)[i].type);
-                    document.getElementById('rowrec'+i).innerHTML = (JSON.parse(xhr2.response)[i].recommended);
+                    document.getElementById("results").appendChild(row);
                 };
-                //document.getElementById('results').innerHTML = (JSON.stringify(xhr2.response));
             };
+        }
         }
         xhr2.open("GET", '/PHP/search.php?search=' + search);
         xhr2.send();
